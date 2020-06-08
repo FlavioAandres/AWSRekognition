@@ -11,12 +11,9 @@ if(!AWS_KEY_VALUE || !AWS_REGION_VALUE || !AWS_SECRET_KEY_VALUE)
     throw new Error('Missing aws enviroment vars')
 
 const rekognizeText = async (req, res)=>{
-
-
-    const {
-        file
-    } = req
-
+    const { file } = req
+    if(!file) return res.status(400).send()
+    
     const rekognition = new AWS.Rekognition({
         accessKeyId: AWS_KEY_VALUE,
         secretAccessKey: AWS_SECRET_KEY_VALUE,
